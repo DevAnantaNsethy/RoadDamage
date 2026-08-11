@@ -3,16 +3,6 @@
 ## Overview
 This project is a modern YOLOv8-based road damage detection demo built for Python 3.14. It includes a Streamlit web app (`app_streamlit.py`) that accepts a single image upload and displays detected road damage with confidence scores and severity.
 
-## Deployment
-The repository is ready for deployment on Streamlit Cloud.
-
-### Required files
-- `app_streamlit.py` — Streamlit demo app
-- `requirements.txt` — deployment dependency list
-- `Procfile` — launch command for Streamlit
-- `.streamlit/config.toml` — Streamlit runtime configuration
-- `model/best.pt` — trained YOLOv8 model weights
-
 ## Local testing
 Install dependencies and run the app locally:
 ```bash
@@ -20,11 +10,35 @@ python -m pip install --user -r requirements.txt
 streamlit run app_streamlit.py
 ```
 
-## Streamlit Cloud
-1. Push this repository to GitHub.
-2. Create a new Streamlit Cloud app and point it to this repo.
-3. Set the main file to `app_streamlit.py` if required.
+## Streamlit Cloud Deployment
 
-## Notes
-- The demo uses the model weight file under `model/best.pt`.
-- Only the Streamlit app is required for deployment; dataset and training scripts are included for maintenance and retraining.
+### Files required
+- `app_streamlit.py` — Streamlit demo app
+- `requirements.txt` — Python dependencies
+- `packages.txt` — Linux system packages (for OpenCV and graphics libraries)
+- `Procfile` — launch command for Streamlit
+- `.streamlit/config.toml` — Streamlit runtime configuration
+- `model/best.pt` — trained YOLOv8 model weights (~24 MB)
+
+### Deploy to Streamlit Cloud
+1. Push this repository to GitHub.
+2. Go to [Streamlit Cloud](https://streamlit.io/cloud).
+3. Create a new app and select this repository.
+4. Set the main file path to `app_streamlit.py` if prompted.
+5. Streamlit Cloud will:
+   - Install system packages from `packages.txt`
+   - Install Python dependencies from `requirements.txt`
+   - Run `streamlit run app_streamlit.py`
+
+### Notes
+- The model requires system libraries (libsm6, libxext6, etc.) which are installed via `packages.txt`
+- OpenCV is configured in headless mode for Linux environments
+- First app start may take 2-3 minutes while PyTorch and Ultralytics are downloaded
+- Model file `model/best.pt` (~24 MB) must be included in the repository
+
+## App Features
+- **Image Upload**: Upload any road image (JPG, JPEG, PNG)
+- **Detection**: Displays annotated image with bounding boxes
+- **Confidence Score**: Shows model confidence for each detection (0-1)
+- **Severity Estimation**: Auto-classifies damage severity (None/Repair, Low, Medium, High)
+- **Download**: Download the annotated result image
