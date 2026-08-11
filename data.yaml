@@ -1,0 +1,12 @@
+train: RDD2022_China_Drone/yolo_dataset/images/train
+val: RDD2022_China_Drone/yolo_dataset/images/val
+test: RDD2022_China_Drone/yolo_dataset/images/test
+
+nc: 6
+names:
+  0: Block crack
+  1: D00
+  2: D10
+  3: D20
+  4: D40
+  5: Repair

@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.ipynb
+*.hdf5
+*.pt
+runs/
+RDD2022_China_Drone/
