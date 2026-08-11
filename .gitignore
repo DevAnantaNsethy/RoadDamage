@@ -6,6 +6,6 @@ __pycache__/
 *.egg-info/
 *.ipynb
 *.hdf5
-*.pt
+yolov8n.pt
 runs/
 RDD2022_China_Drone/
