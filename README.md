@@ -42,3 +42,15 @@ streamlit run app_streamlit.py
 - **Confidence Score**: Shows model confidence for each detection (0-1)
 - **Severity Estimation**: Auto-classifies damage severity (None/Repair, Low, Medium, High)
 - **Download**: Download the annotated result image
+
+## Keep app alive (optional)
+
+Streamlit Cloud may put inactive apps to sleep. To keep the app active, a lightweight scheduled workflow can ping the app URL every 10 minutes.
+
+1. Add the GitHub repository secret `STREAMLIT_APP_URL` with the full app URL (e.g. `https://your-username-xxxxx.streamlitapp.com`).
+   - Go to your repository on GitHub -> Settings -> Secrets and variables -> Actions -> New repository secret.
+   - Name: `STREAMLIT_APP_URL` Value: your Streamlit app URL
+
+2. The repository includes a GitHub Actions workflow `.github/workflows/ping_app.yml` that will run every 10 minutes and send a GET request to the app URL. Enable the workflow and ensure Actions are allowed for your repo.
+
+3. Note: Frequent wakeups may be subject to Streamlit Cloud usage policies and GitHub Actions minutes limits. If you prefer a third-party uptime monitor, services like UptimeRobot or cron-job.org can also perform periodic pings.
